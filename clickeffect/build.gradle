@@ -1,0 +1,70 @@
+import com.augusta.reusablecomponent.Libs
+import com.augusta.reusablecomponent.Dependencies
+import com.augusta.reusablecomponent.Configuration
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.augusta.clickeffect'
+    compileSdk Configuration.compileSdk
+
+    defaultConfig {
+        minSdk Configuration.targetSdk
+        targetSdk Configuration.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.4'
+    }
+}
+
+dependencies {
+
+    implementation Dependencies.composeUI
+    implementation Dependencies.composeFoundation
+    implementation Dependencies.composeMaterial
+    implementation Dependencies.composeActivity
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.material
+    implementation Dependencies.composeTooling
+    implementation(Libs.Reaction.emojipopup)
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            test(MavenPublication) {
+                from components.release
+                groupId = 'com.github.rajkanna7'
+                artifactId = 'clickeffect'
+                version = '1.0'
+            }
+        }
+    }
+}
