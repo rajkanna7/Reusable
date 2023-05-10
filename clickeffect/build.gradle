@@ -1,4 +1,3 @@
-import com.augusta.reusablecomponent.Libs
 import com.augusta.reusablecomponent.Dependencies
 import com.augusta.reusablecomponent.Configuration
 plugins {
@@ -50,7 +49,6 @@ dependencies {
     implementation Dependencies.androidxCoreKtx
     implementation Dependencies.material
     implementation Dependencies.composeTooling
-    implementation(Libs.Reaction.emojipopup)
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

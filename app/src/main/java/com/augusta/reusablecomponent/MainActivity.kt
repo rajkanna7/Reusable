@@ -1,36 +1,24 @@
 package com.augusta.reusablecomponent
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
+import com.augusta.reaction_popup.ReactionOption
 import com.augusta.reusablecomponent.screen.MainContract
 import com.augusta.reusablecomponent.screen.MainScreen
 import com.augusta.reusablecomponent.screen.MainViewModel
 import com.augusta.reusablecomponent.ui.theme.MainAppTheme
-import com.augusta.reusablecomponent.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -57,18 +45,18 @@ class MainActivity : AppCompatActivity() {
                         dispatch = viewModel::dispatch,
                         activity = activity
                     )
-//                    state.reaction?.let { reaction ->
-//                        ReactionOption(
-//                            offset = IntOffset(reaction.x - 12, reaction.y - 88),
-//                            onDismissRequest = {
-//                                viewModel.dismiss()
-//                            },
-//                            onReactionPressed = { emoji ->
-//                                emoji.emoji
-//                                viewModel.dismiss()
-//                            },
-//                        )
-//                    }
+                    state.reaction?.let { reaction ->
+                        ReactionOption(
+                            offset = IntOffset(reaction.x - 12, reaction.y - 88),
+                            onDismissRequest = {
+                                viewModel.dismiss()
+                            },
+                            onReactionPressed = { emoji ->
+                                emoji.emoji
+                                viewModel.dismiss()
+                            },
+                        )
+                    }
 //                    state.isDialog.let {
 //                        if (it) {
 //                            NoInternetScreen(
