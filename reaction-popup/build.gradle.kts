@@ -21,7 +21,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -58,14 +58,17 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
+
 afterEvaluate {
-    publishing{
+    publishing {
         publications {
-            register<MavenPublication>("release") {
-                groupId = "com.github.rajkanna7"
+            val release by publications.registering(MavenPublication::class) {
+                from(components["release"])
                 artifactId = "reaction-popup"
-                version = "1.0"
+                groupId = "com.github.rajkanna7"
+                version = "1.0.1"  //github release of com.github.danbrough.jitpackdemo
             }
         }
     }
 }
+
